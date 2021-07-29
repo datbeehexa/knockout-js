@@ -1,0 +1,75 @@
+<a href="#" data-bind="click:addFields">ADDPerson</a> 
+<br>
+<a href="#" data-bind="click:resetPerson">Reset</a>
+<br>
+<div data-bind="foreach:fields,visible:show">
+    <div data-bind="text:firstName"></div>
+    <div data-bind="text:lastName"></div>
+    <a href="#" data-bind="click:$root.remove">Remove</a>
+	<a href="#" data-bind="click:$root.edit">edit</a>
+</div>
+<form data-bind="visible:showfields">First Name:
+    <input data-bind="value:formFirstName" />Last Name:
+    <input data-bind="value:formLastName" />
+    <a href="#" data-bind="click:addPerson,text:actionTitle"></a>
+</form>
+
+
+
+
+
+function person(firstName, lastName) {
+    var self = this;
+    self.firstName = ko.observable(firstName);
+    self.lastName = ko.observable(lastName);
+}
+
+function personViewModel() {
+    var self = this;
+    self.formFirstName = ko.observable("add");
+    self.formLastName = ko.observable("Value");
+    self.show = ko.observable(true);
+    self.showfields = ko.observable(false);
+    self.flag = ko.observable(false)
+    self.actionTitle = ko.observable('Add')
+    self.editPerson = ko.observable()
+    self.fields = ko.observableArray([
+    new person("paul", "kerry"),
+    new person("john", "cena")]);
+    self.addFields = function () {
+        self.show(false);
+        self.showfields(true);
+        self.flag(false)
+        self.actionTitle('Add')
+    };
+    self.addPerson = function () {
+        if (self.flag()) {
+            self.editPerson().firstName(self.formFirstName())
+            self.editPerson().lastName(self.formLastName())
+            self.flag(false)
+        } else {
+            self.fields.push(new person(self.formFirstName(), self.formLastName()));
+        }
+        self.show(true);
+        self.showfields(false);
+    }
+    self.resetPerson = function () {
+        self.fields.removeAll();
+        self.fields.push(new person("karan", "bhardwaj"));
+        self.fields.push(new person("dipankar", "gupta"));
+    }
+
+    self.edit = function (person) {
+        self.editPerson(person)
+        self.formFirstName(person.firstName())
+        self.formLastName(person.lastName())
+        self.showfields(true)
+        self.flag(true)
+        self.actionTitle('Edit')
+    }
+    self.remove = function (person) {
+        self.fields.remove(person);
+    }
+}
+
+ko.applyBindings(new personViewModel());

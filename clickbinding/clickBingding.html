@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      You've clicked <span data-bind="text: numberOfClicks"></span> times
+      <button data-bind="click: incrementClickCounter, clickBubble: false">
+        Click me
+      </button>
+      <button
+        data-bind="click: function(param1,param2){functionWithParam('Test', 'Data')}, clickBubble: false"
+      >
+        With Param
+      </button>
+    </div>
+
+    <script src="js/knockout-3.5.1.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      var viewModel = {
+        numberOfClicks: ko.observable(0),
+        incrementClickCounter: function () {
+          var previousCount = this.numberOfClicks();
+          this.numberOfClicks(previousCount + 1);
+        },
+        functionWithParam: function (param1, param2) {
+          alert(param1 + " " + param2);
+        },
+      };
+      ko.applyBindings(viewModel);
+    </script>
+  </body>
+</html>

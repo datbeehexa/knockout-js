@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!--View-->
+    <div data-bind="visible: shouldShowMessage">
+      You will see this message only when "shouldShowMessage" holds a true
+      value.
+    </div>
+
+    <div data-bind="visible: myValues().length > 0">
+      You will see this message only when 'myValues' has at least one member.
+    </div>
+    <input type="button" value="show Div" data-bind="click:showDiv" />
+    <input
+      type="button"
+      value="Show Div With Function"
+      data-bind="click:showDivWithFunction"
+    />
+    <script src="js/knockout-3.5.1.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      var viewModel = function () {
+        this.shouldShowMessage = ko.observable(false);
+        this.myValues = ko.observableArray([]);
+        this.showDiv = function () {
+          this.shouldShowMessage(true);
+        };
+        this.showDivWithFunction = function () {
+          myValues.push("Test Data");
+        }.bind(this);
+      };
+      ko.applyBindings(viewModel);
+    </script>
+  </body>
+</html>

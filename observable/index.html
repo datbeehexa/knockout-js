@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="text/javascript" src="knockout-3.5.1.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.2.debug.js"></script>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <!--the view-->
+    First Name :
+    <input
+      type="text"
+      data-bind="value: viewModelPerson.firstName"
+      style="width: 240px"
+    />
+    Last Name :
+    <input
+      type="text"
+      data-bind="value: viewModelPerson.lastName"
+      style="width: 240px"
+    />
+    <div data-bind="text:viewModelPerson.firstName"></div>
+    <div data-bind="text:viewModelPerson.lastName"></div>
+
+    <script src="js/knockout-3.5.1.js" type="text/javascript"></script>
+    <script src="js/app.js" type="text/javascript"></script>
+  </body>
+</html>

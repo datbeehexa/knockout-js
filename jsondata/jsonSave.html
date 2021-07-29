@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    First Name: <input type="text" data-bind="value: firstName"/>
+    Last Name: <input type="text" data-bind="value: lastName"/>
+    <hr>
+    <input type="button" value="Submit" id="btnSubmit">
+    <input type="button" value="Populate Data" id="btnSave">
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="js/knockout-3.5.1.js" type="text/javascript"></script>
+    <script type="text/javascript">
+     var viewModel = {
+         firstName: ko.observable("John"),
+         lastName: ko.observable("Matthew"),
+     };
+     ko.applyBindings(viewModel);
+     $(document).ready(function(){
+        $('#btnSubmit').click(function(){
+            var jsonData = ko.toJSON(viewModel);
+            var plainJS = ko.toJS(viewModel);
+
+            console.log(jsonData);
+            console.log(plainJS);
+        });
+
+        $('#btnSave').click(function(){
+            var jsonData = $.parseJSON('{"firstName":"Matt","lastName":"Daemon"}');
+            var plainJS = ko.toJS(viewModel)
+        });
+     });
+    </script>
+  </body>
+</html>

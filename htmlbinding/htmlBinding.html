@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    HTML Text: <input type="text" data-bind="value: details" style="width: 240px;">
+    <div data-bind="html: details"></div>
+    <script src="js/knockout-3.5.1.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var viewModel  = {
+            details: ko.observable()
+        };
+        ko.applyBindings(viewModel);
+    </script>
+</body>
+</html>
